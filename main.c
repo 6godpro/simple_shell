@@ -24,13 +24,16 @@ int main(int argc, char *argv[])
 		while (argv)
 		{
 			cmd = argv[0];
-			pid = fork();
+		/* replace this portion with execute_cmd function */
+			/* pid = fork();
 			if (pid == -1)
+			{
+				perror("fork failed");
 				return (-1);
+			}
 			if (pid == 0)
 			{
-				if (argv[0][0] == '/')
-					argv[0] = find(argv[0]);
+				argv[0] = find(argv[0]);
 				if (execve(argv[0], argv, environ) == -1)
 				{
 					perror("./shell");
@@ -38,7 +41,7 @@ int main(int argc, char *argv[])
 				}
 			}
 			else
-				wait(NULL);
+				wait(NULL); */
 
 			/* ret_val = execute_cmd(argv); */
 			for (index = 1; argv[index]; index++)
@@ -74,13 +77,12 @@ int main(int argc, char *argv[])
 		cmd = argv[0];
 		/* ret_val = execute_cmd(argv); */
 		
-		pid = fork();
+		/* pid = fork();
 		if (pid == -1)
 			return (-1);
 		if (pid == 0)
 		{
-			if (argv[0][0] == '/')
-				argv[0] = find(argv[0]);
+			argv[0] = find(argv[0]);
 			if (execve(argv[0], argv, environ) == -1)
 			{
 				perror("./shell");
@@ -88,7 +90,7 @@ int main(int argc, char *argv[])
 			}
 		}
 		else
-			wait(NULL);
+			wait(NULL); */
 
 		for (index = 1; argv[index]; index++)
 			free(argv[index]);
