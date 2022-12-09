@@ -18,9 +18,8 @@ dir_t *add_node_end(dir_t **head, char *dir)
 	{
 		last = *head;
 		while (last->next != NULL)
-		{
 			last = last->next;
-		}
+
 		last->next = new;
 	}
 
@@ -44,9 +43,8 @@ void free_list(dir_t *head)
 dir_t *get_path(char *path)
 {
 	int index;
-	char **dirs;
+	char **dirs, *copy;
 	dir_t *head = NULL;
-	char *copy;
 
 	copy = malloc(strlen(path) + 1);
 
@@ -66,6 +64,7 @@ dir_t *get_path(char *path)
 		if (add_node_end(&head, dirs[index]) == NULL)
 		{
 			free(copy);
+		/* TODO free index of dirs */
 			free(dirs);
 			free_list(head);
 			return (NULL);

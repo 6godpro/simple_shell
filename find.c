@@ -11,29 +11,29 @@ char *find(char *command)
 		return (command);
 
 	path = _getenv("PATH");
-	printf("%s\n", *path);
-
-	if (!path)
+	if (!path || !(*path))
 		return (NULL);
 
-	dir_path = get_path(*path + 5);
+	dir_path = get_path(*path);
 	copy = dir_path;
 	while (dir_path)
 	{
-		tmp = malloc(strlen(copy->dir) + strlen(command) + 2);
+		tmp = malloc(strlen(dir_path->dir) + strlen(command) + 2);
 		if (!tmp)
 			return (NULL);
-		strcpy(tmp, copy->dir);
+		strcpy(tmp, dir_path->dir);
 		strcat(tmp, "/");
 		strcat(tmp, command);
 		if (stat(tmp, &sb) == 0)
 		{
-			free_list(dir_path);
+			free_list(copy);
 			return (tmp);
 		}
-		copy = copy->next;
+		dir_path = dir_path->next;
 		free(tmp);
 	}
+
+	free_list(copy);
 	free_list(dir_path);
 
 	return (NULL);
