@@ -1,37 +1,39 @@
 #include "shell.h"
 
+/* executes a command */
 int execute_cmd(char **argv)
 {
 	pid_t pid;
-	/* int flag; */
 
-	if (argv[0] == NULL)
+	if (!argv)
 		return (-1);
 
-	pid = fork();
+	argv[0] = find(argv[0]);
 
-	if (pid == -1)
+	if (!argv[0])
+		return (-1);
+
+	if (argv[0])
 	{
-		/* if (flag) */
-			/* free(argv[0]); */
-		perror("fork failed");
-		return (1);
-	}
-	if (pid == 0)
-	{
-		if (argv[0][0] == '/')
+		pid = fork();
+
+		if (pid == -1)
 		{
-			/* frlag = 1; */
-			argv[0] = find(argv[0]);
+			perror("fork failed from exec");
+			return (-1);
 		}
-		if (execve(argv[0], argv, environ) == -1)
-			perror("./shell");
+		if (pid == 0)
+		{
+			if (execve(argv[0], argv, environ) == -1)
+			{
+				perror("./shell");
+				return (-1);
+			}
+		}
+		else
+			wait(NULL);
+
+		return (0);
 	}
-	else
-		wait(NULL);
-
-	/* if (flag) */
-		/* free(argv[0]); */
-
-	return (0);
+	return (-1);
 }

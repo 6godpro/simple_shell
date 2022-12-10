@@ -21,14 +21,15 @@ void free_list(dir_t *head);
 dir_t *get_path(char *path);
 char **tok_arr(char *str, const char *delim);
 int execute_cmd(char **argv);
-char **clear(char **args);
+char **_getline();
 char *concat_path(char *pathname, char *progname);
 char *find(char *cname);
+int exec_builtin(char **argv);
 
 
 /* functionalities */
-int _unsetenv(const char *name);
-int _setenv(const char *name, const char *value, int overwrite);
+int _unsetenv(const char *var);
+int _setenv(const char *var, const char *value, int overwrite);
 char **_getenv(const char *var);
 
 
