@@ -1,6 +1,13 @@
 #include "shell.h"
 
 
+/**
+ * @strtok: splits a string into series of tokens.
+ * token - smaller chunks of the string that are separated by a
+ * specified character
+ * delim - specifies the trailing delimeter
+ *
+ */
 char **tok_arr(char *str, const char *delim)
 {
 	char *token;

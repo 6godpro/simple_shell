@@ -1,6 +1,8 @@
 #include "shell.h"
 
-
+/**
+ * @path: provides location of the directory.
+ */
 char *find(char *command)
 {
 	char **path, *tmp;
