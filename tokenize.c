@@ -40,7 +40,7 @@ char **tok_arr(char *str, const char *delim)
 			free(arr);
 			return (NULL);
 		}
-		strcpy(arr[index], token);
+		_strcpy(arr[index], token);
 		token = strtok(NULL, delim);
 	}
 	arr[index] = NULL;

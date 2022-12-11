@@ -8,7 +8,7 @@ int exec_builtin(char **argv)
 
 	while (builtins[index])
 	{
-		if (strcmp(argv[0], builtins[index]) == 0)
+		if (_strcmp(argv[0], builtins[index]) == 0)
 		{
 			switch(index)
 			{
@@ -17,9 +17,9 @@ int exec_builtin(char **argv)
 				case 1:
 					return (1);
 				case 2:
-					return (1);
+					return (_exits(argv[1]));
 				case 3:
-					exit (1);
+					return (1);
 				default:
 					break;
 			}

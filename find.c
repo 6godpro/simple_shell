@@ -23,9 +23,9 @@ char *find(char *command)
 		tmp = malloc(strlen(dir_path->dir) + strlen(command) + 2);
 		if (!tmp)
 			return (NULL);
-		strcpy(tmp, dir_path->dir);
-		strcat(tmp, "/");
-		strcat(tmp, command);
+		_strcpy(tmp, dir_path->dir);
+		_strcat(tmp, "/");
+		_strcat(tmp, command);
 		if (stat(tmp, &sb) == 0)
 		{
 			free_list(copy);

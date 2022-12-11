@@ -9,7 +9,7 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 
 	if (new_size == old_size)
 		return (ptr);
-	if (ptr == NULL)
+	if (!ptr)
 	{
 		mem = malloc(new_size);
 		if (mem == NULL)
@@ -17,14 +17,14 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 
 		return (mem);
 	}
-	if (new_size == 0 && ptr != NULL)
+	if (new_size == 0 && ptr)
 	{
 		free(ptr);
 		return (NULL);
 	}
 	cpy1 = ptr;
 	mem = malloc(sizeof(*cpy1) * new_size);
-	if (mem == NULL)
+	if (!mem)
 	{
 		free(ptr);
 		return (NULL);

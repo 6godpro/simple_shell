@@ -1,13 +1,21 @@
 #include "shell.h"
 
+void sig_handler(int sig)
+{
+	char *prompt = "\n$ ";
 
+	char *str = getenv("PWD");
+	write(STDOUT_FILENO, "\n:", 2);
+	write(STDOUT_FILENO, str, _strlen(str));
+	write(STDOUT_FILENO, "$ ", 2);
+}
 int main(int argc, char *argv[])
 {
 	int index, ret_val;
 	char *line, *cmd, **builtincmd;
 
-	if (argc != 1)
-		return (execute_cmd(argv + 1));
+
+	signal(SIGINT, sig_handler);
 
 	if (!isatty(STDIN_FILENO))
 	{
@@ -40,7 +48,10 @@ int main(int argc, char *argv[])
 
 	while (1)
 	{
-		printf("$ ");
+		char *str = getenv("PWD");
+		write(STDOUT_FILENO, ":", 1);
+		write(STDOUT_FILENO, str, _strlen(str));
+		write(STDOUT_FILENO, "$ ", 2);
 
 		argv = _getline();
 		if (!argv || !(*argv))
@@ -59,6 +70,8 @@ int main(int argc, char *argv[])
 					continue;
 				}
 			}
+			else
+				continue;
 		}
 
 		for (index = 1; argv[index]; index++)

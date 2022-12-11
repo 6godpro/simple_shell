@@ -15,17 +15,25 @@ extern char **environ;
 
 
 /* utilities */
-char *find(char *command);
-dir_t *add_node_end(dir_t **head, char *dir);
 void free_list(dir_t *head);
+void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
+dir_t *add_node_end(dir_t **head, char *dir);
 dir_t *get_path(char *path);
-char **tok_arr(char *str, const char *delim);
-int execute_cmd(char **argv);
-char **_getline();
 char *concat_path(char *pathname, char *progname);
 char *find(char *cname);
+char *find(char *command);
+char **tok_arr(char *str, const char *delim);
+char **_getline();
+int _exits(const char *argv);
+int execute_cmd(char **argv);
 int exec_builtin(char **argv);
 
+/* string functions */
+int _strncmp(const char *s1, const char *s2, size_t n);
+int _strcmp(const char *s1, char *s2);
+int _strlen(const char *str);
+char * _strcpy(char *dest, char *src);
+char *_strcat(char *s1, char *s2);
 
 /* functionalities */
 int _unsetenv(const char *var);

@@ -2,12 +2,12 @@
 
 char **_getenv(const char *var)
 {
-	int index, len;
+	size_t index, len;
 
-	len = strlen(var);
+	len = _strlen(var);
 	for (index = 0; environ[index]; index++)
 	{
-		if (strncmp(var, environ[index], len) == 0)
+		if (_strncmp(var, environ[index], len) == 0)
 		{
 			return (&environ[index]);
 		}

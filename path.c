@@ -46,12 +46,12 @@ dir_t *get_path(char *path)
 	char **dirs, *copy;
 	dir_t *head = NULL;
 
-	copy = malloc(strlen(path) + 1);
+	copy = malloc(_strlen(path) + 1);
 
 	if (!copy)
 		return (NULL);
 
-	strcpy(copy, path);
+	_strcpy(copy, path);
 	dirs = tok_arr(copy, ":");
 
 	if (!dirs)
