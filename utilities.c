@@ -36,3 +36,12 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 	free(ptr);
 	return (mem);
 }
+
+
+void sig_handler(int sig)
+{
+	char *prompt = "\n$ ";
+
+	write(STDOUT_FILENO, prompt, _strlen(prompt));
+
+}

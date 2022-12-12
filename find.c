@@ -1,5 +1,6 @@
 #include "shell.h"
 
+
 /**
  * @path: provides location of the directory.
  */
@@ -34,7 +35,6 @@ char *find(char *command)
 		dir_path = dir_path->next;
 		free(tmp);
 	}
-
 	free_list(copy);
 	free_list(dir_path);
 

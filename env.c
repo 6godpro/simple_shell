@@ -17,9 +17,9 @@ char **_getenv(const char *var)
 }
 
 
-int _setenv(const char *name, const char *value)
+int _setenv(char *name, char *value)
 {
-	char *env_var, *new_value, **new_environ;
+	char *env_var = NULL, *new_value, **new_environ;
 	int index, overwrite = 0;
 	unsigned int len_name = _strlen(name);
 	unsigned int len_value = _strlen(value);
@@ -28,19 +28,20 @@ int _setenv(const char *name, const char *value)
 	if (!new_value)
 		return (-1);
 
-	strcpy(new_value, name);
-	strcpy(new_value, "=");
-	strcpy(new_value, value);
+	_strcpy(new_value, name);
+	_strcpy(new_value, "=");
+	_strcpy(new_value, value);
 
 	for (index = 0; environ[index]; index++)
 	{
-		if (_strncmp(name, environ[index], _strlen(name) == 0))
-			env_var = environ[index];
-		else
-			continue;
+		if (_strncmp(name, environ[index], _strlen(name)) == 0)
+		{
+			env_var = malloc(_strlen(environ[index] + 1));
+			_strcpy(env_var, environ[index]);
+		}
+
 	}
 
-	printf("%s\n", env_var);
 	if (env_var)
 	{
 		overwrite = 1;
@@ -52,7 +53,6 @@ int _setenv(const char *name, const char *value)
 	if (!new_environ)
 	{
 		free(new_value);
-		printf("return from malloc new_env\n");
 		return (-1);
 	}
 
@@ -84,12 +84,13 @@ int _setenv(const char *name, const char *value)
 			printf("return from free\n");
 			return (-1);
 		}
-		strcpy(new_environ[index], environ[index]);
+		_strcpy(new_environ[index], environ[index]);
 	}
 	environ = new_environ;
 	if (env_var && overwrite)
 	{
 		env_var = new_value;
+		environ[index] = NULL;
 		return (0);
 	}
 	environ[index] = new_value;

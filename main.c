@@ -1,65 +1,26 @@
 #include "shell.h"
 
-void sig_handler(int sig)
+int main(int __attribute__((__unused__)) argc, char *argv[])
 {
-	char *prompt = "\n$ ";
+	int index, ret_val = 0;
+	char *cmd;
+	ssize_t len = 0;
 
-	char *str = getenv("PWD");
-	write(STDOUT_FILENO, "\n:", 2);
-	write(STDOUT_FILENO, str, _strlen(str));
-	write(STDOUT_FILENO, "$ ", 2);
-}
-int main(int argc, char *argv[])
-{
-	int index, ret_val;
-	char *line, *cmd, **builtincmd;
-
-
-	signal(SIGINT, sig_handler);
-
-	if (!isatty(STDIN_FILENO))
+	while (len >= 0)
 	{
-		while (1)
-		{
-			argv = _getline();
-			if (!argv)
-				return (-1);
+		signal(SIGINT, sig_handler);
+		if(isatty(STDIN_FILENO))
+			write(STDOUT_FILENO, "$ ", 2);
 
-			cmd = argv[0];
-			if (cmd[0] != '\n' && strlen(cmd) != 0)
-			{
-				if (exec_builtin(argv) == -1)
-				{
-					if (execute_cmd(argv) == -1)
-					{
-						perror("./shell");
-						ret_val = -1;
-						break;
-					}
-				}
-			}
-			for (index = 1; argv[index]; index++)
-				free(argv[index]);
-			free(cmd);
-			free(argv);
-		}
-		return (ret_val);
-	}
-
-	while (1)
-	{
-		char *str = getenv("PWD");
-		write(STDOUT_FILENO, ":", 1);
-		write(STDOUT_FILENO, str, _strlen(str));
-		write(STDOUT_FILENO, "$ ", 2);
-
-		argv = _getline();
-		if (!argv || !(*argv))
+		argv = get_input(&len);
+		if (!argv || !argv[0])
 			continue;
 
-		cmd = argv[0];
+		if (len == -1 && isatty(STDIN_FILENO))
+			break;
 
-		if (cmd[0] != '\n' && strlen(cmd) != 0)
+		cmd = argv[0];
+		if (cmd[0] != '\n' && _strlen(cmd) != 0)
 		{
 			if (exec_builtin(argv) == -1)
 			{
@@ -67,18 +28,12 @@ int main(int argc, char *argv[])
 				{
 					perror("./shell");
 					ret_val = -1;
-					continue;
 				}
 			}
-			else
-				continue;
 		}
+		//free(cmd);
+		free_args(argv);
 
-		for (index = 1; argv[index]; index++)
-			free(argv[index]);
-
-		free(cmd);
-		free(argv);
 	}
 	return (ret_val);
 }

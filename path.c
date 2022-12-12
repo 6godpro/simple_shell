@@ -22,7 +22,6 @@ dir_t *add_node_end(dir_t **head, char *dir)
 
 		last->next = new;
 	}
-
 	return (new);
 }
 
@@ -64,13 +63,12 @@ dir_t *get_path(char *path)
 		if (add_node_end(&head, dirs[index]) == NULL)
 		{
 			free(copy);
-		/* TODO free index of dirs */
 			free(dirs);
 			free_list(head);
 			return (NULL);
 		}
 	}
-	free(copy);
 	free(dirs);
+	free(copy);
 	return (head);
 }

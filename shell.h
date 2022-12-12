@@ -16,6 +16,8 @@ extern char **environ;
 
 /* utilities */
 void free_list(dir_t *head);
+void free_args(char **argv);
+void sig_handler(int sig);
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 dir_t *add_node_end(dir_t **head, char *dir);
 dir_t *get_path(char *path);
@@ -23,8 +25,8 @@ char *concat_path(char *pathname, char *progname);
 char *find(char *cname);
 char *find(char *command);
 char **tok_arr(char *str, const char *delim);
-char **_getline();
-int _exits(const char *argv);
+char **get_input(ssize_t *len);
+int _exits(char *argv);
 int execute_cmd(char **argv);
 int exec_builtin(char **argv);
 
@@ -37,7 +39,7 @@ char *_strcat(char *s1, char *s2);
 
 /* functionalities */
 int _unsetenv(const char *var);
-int _setenv(const char *var, const char *value);
+int _setenv(char *var, char *value);
 char **_getenv(const char *var);
 
 

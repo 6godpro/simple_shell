@@ -1,12 +1,12 @@
 #include "shell.h"
 
 
-char **_getline()
+char **get_input(ssize_t *len)
 {
 	char *line = NULL, **args = NULL;
 	size_t n = 0;
 
-	if (getline(&line, &n, stdin) == -1)
+	if ((*len = getline(&line, &n, stdin)) == -1)
 	{
 		free(line);
 		return (NULL);

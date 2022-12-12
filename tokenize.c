@@ -27,12 +27,12 @@ char **tok_arr(char *str, const char *delim)
 	str[index - 1] = '\0';
 	arr = malloc(sizeof(char *) * (words + 1));
 	if (!arr)
-	return (NULL);
+		return (NULL);
 
 	token = strtok(str, delim);
 	for (index = 0; token != NULL; index++)
 	{
-		arr[index] = malloc(strlen(token) + 1);
+		arr[index] = malloc(_strlen(token) + 1);
 		if (!arr[index])
 		{
 			for (index -= 1; index >= 0; index--)
@@ -43,6 +43,7 @@ char **tok_arr(char *str, const char *delim)
 		_strcpy(arr[index], token);
 		token = strtok(NULL, delim);
 	}
+	free(token);
 	arr[index] = NULL;
 	return (arr);
 }
