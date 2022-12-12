@@ -19,7 +19,7 @@ int execute_cmd(char **argv)
 
 		if (pid == -1)
 		{
-			perror("fork failed from exec");
+			perror("fork failed");
 			return (-1);
 		}
 		if (pid == 0)

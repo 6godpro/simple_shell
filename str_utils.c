@@ -9,10 +9,12 @@
 int _strlen(const char *str)
 {
 	int count;
+
 	if (!str)
 		return (-1);
 
-	for (count = 0; str[count]; count++) ;
+	for (count = 0; str[count]; count++) 
+		;
 
 	return (count);
 }
@@ -51,6 +53,7 @@ int _strncmp(const char *s1, const char *s2, size_t n)
 
 	return (*s1 - *s2);
 }
+
 /* read man page */
 int _strcmp(const char *s1, char *s2)
 {
@@ -66,16 +69,16 @@ int _strcmp(const char *s1, char *s2)
 /* read man page */
 char *_strcpy(char *dest, char *src)
 {
-	int i;	
+	int i;
 
 	for (i = 0; src[i]; i++)
-	{
 		dest[i] = src[i];
-	}
+
 	dest[i] = '\0';
 
 	return (dest);
 }
+
 /* read man page */
 char *_strcat(char *s1, char *s2)
 {

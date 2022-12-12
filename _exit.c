@@ -9,11 +9,6 @@ int _exits(const char *argv)
 	{
 		for (i = 0; argv[i]; i++)
 		{
-			/* if (argv[i] == '-')
-			{
-				printf("./shell: Illegal Number: %s\n", argv);
-				return (0);
-			} */
 			if (argv[i] >= '0' && argv[i] <= '9')
 			{
 				num = (num * 10) + (argv[i] - '0');
@@ -26,7 +21,7 @@ int _exits(const char *argv)
 		}
 		printf("Goodbye, see you soon!\n");
 		exit (num);
-	} 
+	}
 
 	printf("Goodbye, see you soon!\n");
 	exit(0);
