@@ -4,7 +4,7 @@
  * _exits - handles arguments for exit command.
  * @argv: argument for exit command.
  *
- * Return - 0 - if an illegal number is passed.
+ * Return: 0 - if an illegal number is passed.
  * Description: program will exit with the value
  *		passed as argument provided it is
  *		not an invalid number. It termin-
@@ -30,7 +30,7 @@ int _exits(char *argv)
 			}
 		}
 		printf("Goodbye, see you soon!\n");
-		exit (num);
+		exit(num);
 	}
 	printf("Goodbye, see you soon!\n");
 	exit(0);

@@ -1,8 +1,18 @@
 #include "shell.h"
 
+
+/**
+ * _getenv - searches the environment variable
+ *	     array for possible match of an
+ *	     environment variable.
+ * @var: Variable to be searched for.
+ * Return: The address of the environment var-
+ *	   iable if found.
+ *	    O/w - NULL.
+ */
 char **_getenv(const char *var)
 {
-	size_t index, len;
+	int index, len;
 
 	len = _strlen(var);
 	for (index = 0; environ[index]; index++)
@@ -16,83 +26,51 @@ char **_getenv(const char *var)
 	return (NULL);
 }
 
-
+/**
+ * _setenv - Adds an environment variabl to the PATH
+ *	     or changes the value if the variable e-
+ *	     xists.
+ * @name: Name of the variable to be changed or added.
+ * @value: Value of the variable.
+ *
+ * Return: 0 on success, -1 on error.
+ */
 int _setenv(char *name, char *value)
 {
-	char *env_var = NULL, *new_value, **new_environ;
-	int index, overwrite = 0;
-	unsigned int len_name = _strlen(name);
-	unsigned int len_value = _strlen(value);
+	char *new_value, **new_environ, **env_var;
+	int index;
+	int len_name = _strlen(name);
+	int len_value = _strlen(value);
 
 	new_value = malloc(sizeof(char) * len_name + len_value + 2);
 	if (!new_value)
 		return (-1);
 
 	_strcpy(new_value, name);
-	_strcpy(new_value, "=");
-	_strcpy(new_value, value);
+	_strcat(new_value, "=");
+	_strcat(new_value, value);
 
-	for (index = 0; environ[index]; index++)
-	{
-		if (_strncmp(name, environ[index], _strlen(name)) == 0)
-		{
-			env_var = malloc(_strlen(environ[index] + 1));
-			_strcpy(env_var, environ[index]);
-		}
-
-	}
-
+	env_var = _getenv(name);
 	if (env_var)
 	{
-		overwrite = 1;
-		new_environ = malloc(sizeof(char *) * (index + 1));
+		*env_var = new_value;
+		return (0);
 	}
-	else
-		new_environ = malloc(sizeof(char *) * (index + 2));
+	for (index = 0; environ[index]; index++)
+		;
 
+	new_environ = malloc(sizeof(char *) * (index + 2));
 	if (!new_environ)
 	{
 		free(new_value);
 		return (-1);
 	}
 
-	//index = 0;
-	/* do
-	{
-		new_environ[index] = malloc(strlen(environ[index] + 1));
-		if (!new_environ[index])
-		{
-			for (index--; index >= 0; index--)
-				free(new_environ[index]);
-			free(new_environ);
-			free(new_value);
-			return (-1);
-		}
-		new_environ[index] = environ[index];
-		index++;
-	} while (environ[index]);*/
-
 	for (index = 0; environ[index]; index++)
-	{
-		new_environ[index] = malloc(strlen(environ[index] + 1));
-		if (!new_environ[index])
-		{
-			for(index--; index >= 0; index--)
-				free(new_environ[index]);
- 			free(new_environ);
-			free(new_value);
-			printf("return from free\n");
-			return (-1);
-		}
-		_strcpy(new_environ[index], environ[index]);
-	}
+		new_environ[index] = environ[index];
+
+	free(environ);
 	environ = new_environ;
-	if (env_var && overwrite)
-	{
-		env_var = new_value;
-		environ[index] = NULL;
-		return (0);
-	}
 	environ[index] = new_value;
 	environ[index + 1] = NULL;
 	return (0);

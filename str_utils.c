@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * _strlen: calculates the length of a string.
+ * _strlen - calculates the length of a string.
  * @str: ...
  * Return: The number of bytes in the string
  *	   pointed to by str.
@@ -13,7 +13,7 @@ int _strlen(const char *str)
 	if (!str)
 		return (-1);
 
-	for (count = 0; str[count]; count++) 
+	for (count = 0; str[count]; count++)
 		;
 
 	return (count);
@@ -54,7 +54,17 @@ int _strncmp(const char *s1, const char *s2, size_t n)
 	return (*s1 - *s2);
 }
 
-/* read man page */
+/**
+ * _strcmp - Compares pointers to two strings.
+ * @s1: A pointer to the first string to be compared.
+ * @s2: A pointer to the second string to be compared.
+ *
+ * Return: If str1 < str2, the negative difference
+ * of the first unmatched characters.
+ *         If str1 == str2, 0.
+ *         If str1 > str2, the positive difference
+ * of the first unmatched characters.
+ */
 int _strcmp(const char *s1, char *s2)
 {
 	while (*s1 == *s2 && *s1 && *s2)
@@ -66,7 +76,15 @@ int _strcmp(const char *s1, char *s2)
 	return (*s1 - *s2);
 }
 
-/* read man page */
+/**
+ * _strcpy - copies the string pointed
+ *	to by src, including the
+ *	terminating null byte (\0), to
+ *	the buffer pointed to by dest.
+ * @src: variable for buffer source.
+ * @dest: variable for destination.
+ * Return: dest.
+ */
 char *_strcpy(char *dest, char *src)
 {
 	int i;
@@ -79,7 +97,15 @@ char *_strcpy(char *dest, char *src)
 	return (dest);
 }
 
-/* read man page */
+/**
+ * _strcat - concatenates two strings.
+ * @s2: The source string to be appended
+ *	to @dest.
+ * @s1: A pointer to the string to
+ *	be concatenated upon.
+ * Return: A pointer to the destination
+ *	   string @s1.
+ */
 char *_strcat(char *s1, char *s2)
 {
 	int len1, i;

@@ -19,16 +19,17 @@ int exec_builtin(char **argv)
 			{
 				case 0:
 					chdir(argv[1]);
+					return (0);
 				case 1:
 					return (1);
-				case 2:	
+				case 2:
 					if (!argv[1] || !argv[2])
 					{
 						write(STDOUT_FILENO, "usage: setenv variable value\n", 29);
 						return (0);
 					}
 
-					if (_setenv(argv[1], argv[2]) == -1);
+					if (_setenv(argv[1], argv[2]) == -1)
 					{
 						write(STDERR_FILENO, "failed\n", 7);
 						return (0);

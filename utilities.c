@@ -1,11 +1,20 @@
 #include "shell.h"
 
-
+/**
+ * _realloc - Reallocates a memory block using malloc and free.
+ * @ptr: A pointer to the previously allocated memory.
+ * @old_size: The size in bytes of ptr.
+ * @new_size: The size in bytes for the new memory block.
+ *
+ * Return: ptr - If new_size == old_size.
+ *         NULL - If new_size == 0 and ptr is not NULL.
+ *         Otherwise - a pointer to the reallocated memory block.
+ */
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 {
 	void *mem;
 	char *cpy1, *cpy2;
-	int i;
+	unsigned int i;
 
 	if (new_size == old_size)
 		return (ptr);
@@ -37,11 +46,16 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 	return (mem);
 }
 
-
+/**
+ * sig_handler - Displays a new prompt if a signal
+ *		 is encountered.
+ * @sig: ...
+ */
 void sig_handler(int sig)
 {
 	char *prompt = "\n$ ";
 
+	(void)sig;
 	write(STDOUT_FILENO, prompt, _strlen(prompt));
 
 }

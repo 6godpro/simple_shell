@@ -1,7 +1,6 @@
 #ifndef SHELL_H
 #define SHELL_H
 
-typedef struct dir_s dir_t;
 
 #include <string.h>
 #include <stdio.h>
@@ -13,6 +12,12 @@ typedef struct dir_s dir_t;
 
 extern char **environ;
 
+/* TODO include documentation for struct */
+typedef struct dir_s
+{
+	char *dir;
+	struct dir_s *next;
+} dir_t;
 
 /* utilities */
 void free_list(dir_t *head);
@@ -43,12 +48,6 @@ int _setenv(char *var, char *value);
 char **_getenv(const char *var);
 
 
-/* TODO include documentation for struct */
-typedef struct dir_s
-{
-	char *dir;
-	struct dir_s *next;
-} dir_t;
 
 
 #endif /* SHELL_H */

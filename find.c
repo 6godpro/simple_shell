@@ -2,7 +2,10 @@
 
 
 /**
- * @path: provides location of the directory.
+ * find - finds the location of a command.
+ * @command: command to be located.
+ * Return: The absolute path of the command.
+ *	   O/w - NULL, if the command is not found.
  */
 char *find(char *command)
 {

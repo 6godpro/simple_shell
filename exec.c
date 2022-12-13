@@ -1,6 +1,12 @@
 #include "shell.h"
 
-/* executes a command */
+/**
+ * execute_cmd - executes a command.
+ * @argv: array of arguments and command
+ *	 name.
+ * Return: 0 on success, -1 on error.
+ *
+ */
 int execute_cmd(char **argv)
 {
 	pid_t pid;

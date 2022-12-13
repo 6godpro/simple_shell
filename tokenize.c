@@ -2,11 +2,11 @@
 
 
 /**
- * @strtok: splits a string into series of tokens.
- * token - smaller chunks of the string that are separated by a
- * specified character
- * delim - specifies the trailing delimeter
- *
+ * tok_arr - splits a string into series of tokens.
+ * @str: String to be tokenized.
+ * @delim: Specifies the delimiter.
+ * Return: The tokenized string.
+ *	   O/w - NULL.
  */
 char **tok_arr(char *str, const char *delim)
 {
