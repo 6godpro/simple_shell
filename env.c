@@ -33,8 +33,8 @@ char **_getenv(const char *var)
  * @name: Name of the variable to be changed or added.
  * @value: Value of the variable.
  *
- * Return: 0 on success, -1 on error.
- */
+ * Return: 0 on success, 1 on error.
+*/
 int _setenv(char *name, char *value)
 {
 	char *new_value, **new_environ, **env_var;
@@ -42,9 +42,9 @@ int _setenv(char *name, char *value)
 	int len_name = _strlen(name);
 	int len_value = _strlen(value);
 
-	new_value = malloc(sizeof(char) * len_name + len_value + 2);
+	new_value = malloc(len_name + len_value + 2);
 	if (!new_value)
-		return (-1);
+		return (1);
 
 	_strcpy(new_value, name);
 	_strcat(new_value, "=");
@@ -63,15 +63,55 @@ int _setenv(char *name, char *value)
 	if (!new_environ)
 	{
 		free(new_value);
-		return (-1);
+		return (1);
 	}
 
 	for (index = 0; environ[index]; index++)
 		new_environ[index] = environ[index];
 
-	free(environ);
 	environ = new_environ;
 	environ[index] = new_value;
 	environ[index + 1] = NULL;
+	return (0);
+}
+
+
+/**
+ * _unsetenv - Deletes an environmental variable from the PATH.
+ * @name: A pointer to the name of the variable.
+ *
+ * Return: If an error occurs - 1.
+ *         Otherwise - 0.
+ */
+int _unsetenv(char *name)
+{
+	char **env_var, **copy;
+	int index = 0, copy_index = 0;
+
+	env_var = _getenv(name);
+	if (!env_var)
+		return (0);
+
+	while (environ[index++])
+		;
+
+	copy = malloc(sizeof(char *) * index);
+	if (!copy)
+		return (1);
+
+	index = 0;
+	while (environ[index++])
+	{
+		if (*env_var == environ[index])
+		{
+			free(environ[index]);
+			continue;
+		}
+		copy[copy_index++] = environ[index];
+	}
+	free(environ);
+	environ = copy;
+	environ[index - 1] = NULL;
+
 	return (0);
 }

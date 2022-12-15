@@ -45,17 +45,3 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 	free(ptr);
 	return (mem);
 }
-
-/**
- * sig_handler - Displays a new prompt if a signal
- *		 is encountered.
- * @sig: ...
- */
-void sig_handler(int sig)
-{
-	char *prompt = "\n$ ";
-
-	(void)sig;
-	write(STDOUT_FILENO, prompt, _strlen(prompt));
-
-}

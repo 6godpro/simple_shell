@@ -29,9 +29,10 @@ int main(int __attribute__((__unused__)) argc, char *argv[])
 		cmd = argv[0];
 		if (cmd[0] != '\n' && _strlen(cmd) != 0)
 		{
-			if (exec_builtin(argv) == -1)
+			ret_val = exec_builtin(argv);
+			if (ret_val == -1)
 			{
-				ret_val = execute_cmp(argv);
+				ret_val = execute_cmd(argv);
 				if (ret_val == -1)
 				{
 					perror("./shell");
@@ -40,7 +41,6 @@ int main(int __attribute__((__unused__)) argc, char *argv[])
 			}
 		}
 		free_args(argv);
-
 	}
-	return (ret_val);
+	return (0);
 }

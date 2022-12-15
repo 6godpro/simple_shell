@@ -43,11 +43,10 @@ char * _strcpy(char *dest, char *src);
 char *_strcat(char *s1, char *s2);
 
 /* functionalities */
-int _unsetenv(const char *var);
+int _unsetenv(char *var);
 int _setenv(char *var, char *value);
 char **_getenv(const char *var);
-
-
+int setenv_handler(char **av);
 
 
 #endif /* SHELL_H */
