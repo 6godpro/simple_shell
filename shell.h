@@ -10,9 +10,14 @@
 #include <sys/stat.h>
 #include <stdlib.h>
 
+/* Global environment */
 extern char **environ;
 
-/* TODO include documentation for struct */
+/**
+ * struct dir_s - A new struct type defining a linked list.
+ * @dir: A directory path.
+ * @next: A pointer to another struct dir_s.
+ */
 typedef struct dir_s
 {
 	char *dir;
@@ -37,16 +42,19 @@ int exec_builtin(char **argv);
 
 /* string functions */
 int _strncmp(const char *s1, const char *s2, size_t n);
+int _putchar(char c);
 int _strcmp(const char *s1, char *s2);
 int _strlen(const char *str);
+int count_words(char **str);
 char * _strcpy(char *dest, char *src);
 char *_strcat(char *s1, char *s2);
-
 /* functionalities */
+void print_env(void);
 int _unsetenv(char *var);
 int _setenv(char *var, char *value);
-char **_getenv(const char *var);
 int setenv_handler(char **av);
+int unsetenv_handler(char **av);
+char **_getenv(const char *var);
 
 
 #endif /* SHELL_H */

@@ -21,11 +21,12 @@ int exec_builtin(char **argv)
 					chdir(argv[1]);
 					return (0);
 				case 1:
+					print_env();
 					return (1);
 				case 2:
 					return (setenv_handler(argv));
 				case 3:
-					return (_unsetenv(argv[1]));
+					return (unsetenv_handler(argv));
 				case 4:
 					return (_exits(argv[1]));
 				case 5:

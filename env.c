@@ -2,6 +2,24 @@
 
 
 /**
+  * print_env - Prints the current environment.
+  *
+  * Return: void.
+  */
+void print_env(void)
+{
+	int index1, index2;
+
+	for (index1 = 0; environ[index1]; index1++)
+	{
+		for (index2 = 0; environ[index1][index2]; index2++)
+			_putchar(environ[index1][index2]);
+
+		_putchar('\n');
+	}
+}
+
+/**
  * _getenv - searches the environment variable
  *	     array for possible match of an
  *	     environment variable.
@@ -27,14 +45,14 @@ char **_getenv(const char *var)
 }
 
 /**
- * _setenv - Adds an environment variabl to the PATH
+ * _setenv - Adds an environment variable to the PATH
  *	     or changes the value if the variable e-
  *	     xists.
  * @name: Name of the variable to be changed or added.
  * @value: Value of the variable.
  *
  * Return: 0 on success, 1 on error.
-*/
+ */
 int _setenv(char *name, char *value)
 {
 	char *new_value, **new_environ, **env_var;

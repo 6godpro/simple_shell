@@ -7,9 +7,10 @@
 void free_args(char **argv)
 {
 	int index;
+	char **tmp = argv;
 
 	for (index = 0; argv[index]; index++)
 		free(argv[index]);
 
-	free(argv);
+	free(tmp);
 }
