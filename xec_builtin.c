@@ -1,14 +1,16 @@
 #include "shell.h"
 
 /**
- * exec_builtin - executes the builtin commands.
+ * exec_builtin - controls the execution of the
+ *		  builtin commands.
  * @argv: array of character pointer to hold
  *	  arguments.
  * Return: If the command is not found - -1.
  */
 int exec_builtin(char **argv)
 {
-	char *builtins[] = {"cd", "env", "setenv", "unsetenv", "exit", "help", NULL};
+	char *builtins[] = {"cd", "env", "setenv", "unsetenv",
+				"exit", "alias", "help", NULL};
 	int index = 0;
 
 	while (builtins[index])
@@ -30,6 +32,8 @@ int exec_builtin(char **argv)
 				case 4:
 					return (_exits(argv[1]));
 				case 5:
+					return (alias_handler(argv));
+				case 6:
 					return (1);
 				default:
 					break;

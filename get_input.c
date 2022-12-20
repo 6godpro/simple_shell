@@ -18,7 +18,7 @@ char **get_input(ssize_t *len)
 		free(line);
 		return (NULL);
 	}
-	args = tok_arr(line, " ");
+	args = _strtok(line, " ");
 
 	free(line);
 

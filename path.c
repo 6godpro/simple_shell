@@ -72,7 +72,7 @@ dir_t *get_path(char *path)
 		return (NULL);
 
 	_strcpy(copy, path);
-	dirs = tok_arr(copy, ":");
+	dirs = _strtok(copy, ":");
 
 	if (!dirs)
 	{

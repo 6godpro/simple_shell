@@ -13,6 +13,7 @@
 /* Global environment */
 extern char **environ;
 
+char **aliases;
 /**
  * struct dir_s - A new struct type defining a linked list.
  * @dir: A directory path.
@@ -24,6 +25,7 @@ typedef struct dir_s
 	struct dir_s *next;
 } dir_t;
 
+
 /* utilities */
 void free_list(dir_t *head);
 void free_args(char **argv);
@@ -34,13 +36,13 @@ dir_t *get_path(char *path);
 char *concat_path(char *pathname, char *progname);
 char *find(char *cname);
 char *find(char *command);
-char **tok_arr(char *str, const char *delim);
 char **get_input(ssize_t *len);
 int _exits(char *argv);
 int execute_cmd(char **argv);
 int exec_builtin(char **argv);
 
 /* string functions */
+void _puts(char *str);
 int _strncmp(const char *s1, const char *s2, size_t n);
 int _putchar(char c);
 int _strcmp(const char *s1, char *s2);
@@ -48,7 +50,11 @@ int _strlen(const char *str);
 int count_words(char **str);
 char * _strcpy(char *dest, char *src);
 char *_strcat(char *s1, char *s2);
-/* functionalities */
+char **_strtok(char *str, const char *delim);
+int letters_len(char *str, const char *delim);
+int count_token(char *str, const char *delim);
+
+/* env functionalities */
 void print_env(void);
 int _unsetenv(char *var);
 int _setenv(char *var, char *value);
@@ -56,5 +62,10 @@ int setenv_handler(char **av);
 int unsetenv_handler(char **av);
 char **_getenv(const char *var);
 
+/* alias functionalities */
+int creat_alias(void);
+int set_alias(char **argv);
+int alias_handler(char **argv);
+void print_alias(char *name);
 
 #endif /* SHELL_H */

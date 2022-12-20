@@ -13,6 +13,21 @@ int _putchar(char c)
 }
 
 /**
+ * _puts - prints a string to STDOUT.
+ * @str: string to be printed.
+ */
+void _puts(char *str)
+{
+	int i = 0;
+
+	while (str[i])
+	{
+		_putchar(str[i]);
+		i++;
+	}
+}
+
+/**
  * count_words - Counts the numbers of strings in
  *		 an array of string.
  * @str: The array of strings to be counted.

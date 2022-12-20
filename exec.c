@@ -15,7 +15,6 @@ int execute_cmd(char **argv)
 		return (-1);
 
 	argv[0] = find(argv[0]);
-
 	if (!argv[0])
 		return (-1);
 
