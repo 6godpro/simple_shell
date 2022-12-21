@@ -11,13 +11,14 @@ int execute_cmd(char **argv)
 {
 	pid_t pid;
 	int ret, status;
+	char *cmd;
 
 	if (!argv)
 		return (-1);
 
-	argv[0] = find(argv[0]);
+	cmd = find(argv[0]);
 
-	if (argv[0] && access(argv[0], X_OK) == 0)
+	if (cmd && access(cmd, X_OK) == 0)
 	{
 		pid = fork();
 
@@ -28,9 +29,9 @@ int execute_cmd(char **argv)
 		}
 		if (pid == 0)
 		{
-			if (execve(argv[0], argv, environ) == -1)
+			if (execve(cmd, argv, environ) == -1)
 			{
-				perror("./shell");
+				perror("./sh");
 				return (-1);
 			}
 		}
@@ -39,7 +40,7 @@ int execute_cmd(char **argv)
 			wait(&status);
 			ret = WEXITSTATUS(status);
 		}
-
+		free(cmd);
 		return (ret);
 	}
 	return (-1);

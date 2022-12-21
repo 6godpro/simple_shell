@@ -32,5 +32,6 @@ int _exits(char **argv)
 		free_args(argv);
 		exit(num);
 	}
+	free_args(argv);
 	exit(num);
 }

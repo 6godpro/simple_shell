@@ -78,7 +78,7 @@ int _setenv(char *name, char *value)
 	}
 	for (index = 0; environ[index]; index++)
 		;
-			
+
 	new_environ = malloc(sizeof(char *) * (index + 2));
 	if (!new_environ)
 	{

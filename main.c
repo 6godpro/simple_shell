@@ -35,12 +35,13 @@ int main(int __attribute__((__unused__)) argc, char *argv[])
 				ret_val = execute_cmd(argv);
 				if (ret_val == -1)
 				{
-					perror("./shell");
+					perror("./sh");
 					ret_val = -1;
 				}
 			}
 		}
 		free_args(argv);
 	}
+	free_args(argv);
 	return (ret_val);
 }
