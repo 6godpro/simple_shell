@@ -11,18 +11,18 @@ void cpy_lineptr(char **lineptr, size_t *n, char *buff, size_t byte)
 {
 	if (*lineptr == NULL)
 	{
-		if (byte > 100)
+		if (byte > 120)
 			*n = byte;
 		else
-			*n = 100;
+			*n = 120;
 		*lineptr = buff;
 	}
 	else if (*n < byte)
 	{
-		if (byte > 100)
+		if (byte > 120)
 			*n = byte;
 		else
-			*n = 100;
+			*n = 120;
 		*lineptr = buff;
 	}
 	else
@@ -53,7 +53,7 @@ ssize_t _getline(char **lineptr, size_t *n, FILE *stream)
 		return (-1);
 	count = 0;
 
-	buff = malloc(100);
+	buff = malloc(sizeof(char) * 120);
 	if (!buff)
 		return (-1);
 
@@ -70,7 +70,7 @@ ssize_t _getline(char **lineptr, size_t *n, FILE *stream)
 			count++;
 			break;
 		}
-		if (count >= 100)
+		if (count >= 120)
 			buff = _realloc(buff, count, count + 1);
 
 		buff[count] = c;

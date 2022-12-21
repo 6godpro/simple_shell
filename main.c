@@ -42,6 +42,5 @@ int main(int __attribute__((__unused__)) argc, char *argv[])
 		}
 		free_args(argv);
 	}
-	free_args(argv);
 	return (ret_val);
 }
