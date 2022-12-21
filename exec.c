@@ -31,7 +31,7 @@ int execute_cmd(char **argv)
 		{
 			if (execve(cmd, argv, environ) == -1)
 			{
-				perror("./sh");
+				perror("./shell");
 				return (-1);
 			}
 		}

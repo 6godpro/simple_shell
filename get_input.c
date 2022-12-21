@@ -12,7 +12,7 @@ char **get_input(ssize_t *len)
 	char *line = NULL, **args = NULL;
 	size_t n = 0;
 
-	*len = _getline(&line, &n, stdin);
+	*len = getline(&line, &n, stdin);
 	if (*len == -1)
 	{
 		free(line);

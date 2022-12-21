@@ -35,7 +35,7 @@ int main(int __attribute__((__unused__)) argc, char *argv[])
 				ret_val = execute_cmd(argv);
 				if (ret_val == -1)
 				{
-					perror("./sh");
+					perror("./shell");
 					ret_val = -1;
 				}
 			}
