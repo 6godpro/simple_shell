@@ -10,15 +10,14 @@
 int execute_cmd(char **argv)
 {
 	pid_t pid;
+	int ret, status;
 
 	if (!argv)
 		return (-1);
 
 	argv[0] = find(argv[0]);
-	if (!argv[0])
-		return (-1);
 
-	if (argv[0])
+	if (argv[0] && access(argv[0], X_OK) == 0)
 	{
 		pid = fork();
 
@@ -36,9 +35,12 @@ int execute_cmd(char **argv)
 			}
 		}
 		else
-			wait(NULL);
+		{
+			wait(&status);
+			ret = WEXITSTATUS(status);
+		}
 
-		return (0);
+		return (ret);
 	}
 	return (-1);
 }

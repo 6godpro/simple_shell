@@ -39,7 +39,6 @@ char *find(char *command)
 		free(tmp);
 	}
 	free_list(copy);
-	free_list(dir_path);
 
 	return (NULL);
 }

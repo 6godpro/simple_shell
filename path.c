@@ -73,23 +73,20 @@ dir_t *get_path(char *path)
 
 	_strcpy(copy, path);
 	dirs = _strtok(copy, ":");
+	free(copy);
 
 	if (!dirs)
-	{
-		free(copy);
 		return (NULL);
-	}
+
 	for (index = 0; dirs[index]; index++)
 	{
 		if (add_node_end(&head, dirs[index]) == NULL)
 		{
-			free(copy);
 			free(dirs);
 			free_list(head);
 			return (NULL);
 		}
 	}
 	free(dirs);
-	free(copy);
 	return (head);
 }

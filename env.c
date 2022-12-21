@@ -8,14 +8,16 @@
   */
 void print_env(void)
 {
-	int index1, index2;
+	int index;
 
-	for (index1 = 0; environ[index1]; index1++)
+	if (!environ)
+		return;
+
+	for (index = 0; environ[index]; index++)
 	{
-		for (index2 = 0; environ[index1][index2]; index2++)
-			_putchar(environ[index1][index2]);
+		write(STDOUT_FILENO, environ[index], _strlen(environ[index]));
+		write(STDOUT_FILENO, "\n", 1);
 
-		_putchar('\n');
 	}
 }
 
@@ -76,7 +78,7 @@ int _setenv(char *name, char *value)
 	}
 	for (index = 0; environ[index]; index++)
 		;
-
+			
 	new_environ = malloc(sizeof(char *) * (index + 2));
 	if (!new_environ)
 	{
@@ -122,7 +124,7 @@ int _unsetenv(char *name)
 	{
 		if (*env_var == environ[index])
 		{
-			free(environ[index]);
+			free(*env_var);
 			continue;
 		}
 		copy[copy_index++] = environ[index];

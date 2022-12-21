@@ -36,7 +36,7 @@ char *concat_path(char *pathname, char *progname);
 char *find(char *cname);
 char *find(char *command);
 char **get_input(ssize_t *len);
-int _exits(char *argv);
+int _exits(char **argv);
 int execute_cmd(char **argv);
 int exec_builtin(char **argv);
 void cpy_lineptr(char **lineptr, size_t *n, char *buff, size_t byte);

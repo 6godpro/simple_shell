@@ -11,24 +11,25 @@
  *		ates with zero if no argument was
  *		passed.
  */
-int _exits(char *argv)
+int _exits(char **argv)
 {
 	int i, num = 0;
 
-	if (argv)
+	if (argv[1])
 	{
-		for (i = 0; argv[i]; i++)
+		for (i = 0; argv[1][i]; i++)
 		{
-			if (argv[i] >= '0' && argv[i] <= '9')
+			if (argv[1][i] >= '0' && argv[1][i] <= '9')
 			{
-				num = (num * 10) + (argv[i] - '0');
+				num = (num * 10) + (argv[1][i] - '0');
 			}
 			else
 			{
-				printf("./shell: Illegal Number: %s\n", argv);
+				printf("./shell: Illegal Number: %s\n", argv[1]);
 				return (0);
 			}
 		}
+		free_args(argv);
 		exit(num);
 	}
 	exit(num);
