@@ -1,32 +1,34 @@
 #include "shell.h"
 
 
-int creat_alias(void);
-int set_alias(char **argv);
+char **creat_alias(void);
+int set_alias(char **aliases, char **argv);
 
 /**
  * creat_alias - allocates memory for the first alias.
  *
  * Return: 0 on success, -1 on error.
  */
-int creat_alias(void)
+char **creat_alias(void)
 {
-	aliases = malloc(sizeof(char *) * 2);
-	if (!aliases)
-		return (-1);
+	char **memory;
 
-	aliases[0] = "x";
-	aliases[1] = NULL;
+	memory = malloc(sizeof(char *) * 2);
+	if (memory)
+		return (NULL);
 
-	return (0);
+	memory[0] = "x";
+	memory[1] = NULL;
+
+	return (memory);
 }
 /**
  * set_alias - Creates a new alias or updates an existing one.
  * @argv: Array of character pointer.
- *
+ * @aliases: ...
  * Return: 0 on success, -1 on error.
  */
-int set_alias(char **argv)
+int set_alias(char **aliases, char **argv)
 {
 	int len = 0, index = 0;
 	int i, j;
@@ -35,11 +37,12 @@ int set_alias(char **argv)
 
 	if (!flag)
 	{
-		if (creat_alias() == -1)
+		aliases = creat_alias();
+		if (aliases == NULL)
 			return (-1);
 		flag = 1;
 	}
-
+	printf("%s\n", aliases[0]);
 	for (i = 1; argv[i]; i++)
 	{
 		for (j = 0; argv[i][j]; j++)

@@ -29,9 +29,7 @@ int _exits(char *argv)
 				return (0);
 			}
 		}
-		printf("Goodbye, see you soon!\n");
 		exit(num);
 	}
-	printf("Goodbye, see you soon!\n");
-	exit(0);
+	exit(num);
 }

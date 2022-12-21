@@ -78,21 +78,21 @@ int unsetenv_handler(char **av)
 int alias_handler(char **argv)
 {
 	int i = 0, words;
-	char *name;
+	char *name, **aliases;
 
+	aliases = NULL;
 	words = count_words(argv);
 	if (words == 0)
 		return (1);
 
 	if (words == 1 && aliases)
 	{
-		print_alias(NULL);
+		print_alias(aliases, NULL);
 		return (0);
 	}
 	name = argv[1];
 	if (name == NULL)
 		return (1);
-
 	if (!aliases)
 	{
 check_alias:
@@ -102,7 +102,7 @@ check_alias:
 			{
 				if (i == 0 || name[i + 1] == '\0')
 					return (1);
-				if (set_alias(argv) == -1)
+				if (set_alias(aliases, argv) == -1)
 					return (1);
 				return (0);
 			}
@@ -114,7 +114,7 @@ check_alias:
 	{
 		goto check_alias;
 print_alias:
-		print_alias(name);
+		print_alias(aliases, name);
 	}
 	return (0);
 }
@@ -123,11 +123,12 @@ print_alias:
  * print_alias - prints alias at an index or the entire
  *		 list of aliases.
  * @alias: alias to be printed.
+ * @aliases: ...
  * Return: void
  * Desc: if alias is NULL, it prints the list of
  *	 aliases, else it prints the specified alias.
  */
-void print_alias(char *alias)
+void print_alias(char **aliases, char *alias)
 {
 	int i, len;
 

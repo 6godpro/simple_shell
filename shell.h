@@ -12,8 +12,7 @@
 
 /* Global environment */
 extern char **environ;
-
-char **aliases;
+extern char **aliases;
 /**
  * struct dir_s - A new struct type defining a linked list.
  * @dir: A directory path.
@@ -40,6 +39,8 @@ char **get_input(ssize_t *len);
 int _exits(char *argv);
 int execute_cmd(char **argv);
 int exec_builtin(char **argv);
+void cpy_lineptr(char **lineptr, size_t *n, char *buff, size_t byte);
+ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
 
 /* string functions */
 void _puts(char *str);
@@ -48,7 +49,7 @@ int _putchar(char c);
 int _strcmp(const char *s1, char *s2);
 int _strlen(const char *str);
 int count_words(char **str);
-char * _strcpy(char *dest, char *src);
+char *_strcpy(char *dest, char *src);
 char *_strcat(char *s1, char *s2);
 char **_strtok(char *str, const char *delim);
 int letters_len(char *str, const char *delim);
@@ -63,9 +64,9 @@ int unsetenv_handler(char **av);
 char **_getenv(const char *var);
 
 /* alias functionalities */
-int creat_alias(void);
-int set_alias(char **argv);
+char **creat_alias(void);
+int set_alias(char **aliases, char **argv);
 int alias_handler(char **argv);
-void print_alias(char *name);
+void print_alias(char **aliases, char *name);
 
 #endif /* SHELL_H */
