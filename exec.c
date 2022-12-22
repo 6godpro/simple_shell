@@ -40,7 +40,6 @@ int execute_cmd(char **argv)
 			wait(&status);
 			ret = WEXITSTATUS(status);
 		}
-		free(cmd);
 		return (ret);
 	}
 	return (-1);

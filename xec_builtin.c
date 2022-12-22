@@ -32,7 +32,8 @@ int exec_builtin(char **argv)
 				case 4:
 					return (_exits(argv));
 				case 5:
-					return (alias_handler(argv));
+					return (1);
+					/*return (alias_handler(argv));*/
 				case 6:
 					return (1);
 				default:

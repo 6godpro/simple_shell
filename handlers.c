@@ -75,25 +75,27 @@ int unsetenv_handler(char **av)
  * @argv:...
  * Return: 0 on success, -1 on error.
  */
-int alias_handler(char **argv)
+/*int alias_handler(char **argv)
 {
 	int i = 0, words;
-	char *name, **aliases;
+	char *name;
+	extern char **tmp;
 
-	aliases = NULL;
+	tmp = NULL;
+
 	words = count_words(argv);
 	if (words == 0)
 		return (1);
 
-	if (words == 1 && aliases)
+	if (words == 1 && tmp)
 	{
-		print_alias(aliases, NULL);
+		print_alias(tmp, NULL);
 		return (0);
 	}
 	name = argv[1];
 	if (name == NULL)
 		return (1);
-	if (!aliases)
+	if (!tmp)
 	{
 check_alias:
 		while (name[i])
@@ -102,7 +104,7 @@ check_alias:
 			{
 				if (i == 0 || name[i + 1] == '\0')
 					return (1);
-				if (set_alias(aliases, argv) == -1)
+				if (set_alias(tmp, argv) == -1)
 					return (1);
 				return (0);
 			}
@@ -110,44 +112,45 @@ check_alias:
 		}
 		goto print_alias;
 	}
-	if (aliases)
+	if (tmp)
 	{
 		goto check_alias;
 print_alias:
-		print_alias(aliases, name);
+		print_alias(tmp, name);
 	}
 	return (0);
-}
+}*/
 
 /**
  * print_alias - prints alias at an index or the entire
  *		 list of aliases.
  * @alias: alias to be printed.
- * @aliases: ...
+ * @list: ...
  * Return: void
  * Desc: if alias is NULL, it prints the list of
  *	 aliases, else it prints the specified alias.
  */
-void print_alias(char **aliases, char *alias)
+/*void print_alias(char **list, char *alias)
 {
 	int i, len;
 
-	if (!aliases)
+	if (!list)
 		return;
-	for (i = 0; aliases[i]; i++)
+	for (i = 0; list[i]; i++)
 	{
 		if (alias == NULL)
 		{
-			printf("%s\n", aliases[i]);
+			write(STDOUT_FILENO, list[i], _strlen(list[i]));
+			write(STDOUT_FILENO, "\n", 1);
 			continue;
 		}
 		len = 0;
-		while (aliases[i][len] != '=')
+		while (list[i][len] != '=')
 			len++;
-		if (_strncmp(alias, aliases[i], len) == 0 && _strlen(alias) == len)
+		if (_strncmp(alias, list[i], len) == 0 && _strlen(alias) == len)
 		{
-			_puts(aliases[i]);
-			_puts("\n");
+			write(STDOUT_FILENO, list[i], _strlen(list[i]));
+			write(STDOUT_FILENO, "\n", 1);
 		}
 	}
-}
+}*/

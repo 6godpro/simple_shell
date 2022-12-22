@@ -62,6 +62,8 @@ int _setenv(char *var, char *value);
 int setenv_handler(char **av);
 int unsetenv_handler(char **av);
 char **_getenv(const char *var);
+void free_env(void);
+
 
 /* alias functionalities */
 char **creat_alias(void);
