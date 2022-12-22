@@ -14,6 +14,7 @@
 int _exits(char **argv)
 {
 	int i, num = 0;
+	char *error_msg = "./hsh: 1: exit: Illegal Number:";
 
 	if (argv[1])
 	{
@@ -25,8 +26,11 @@ int _exits(char **argv)
 			}
 			else
 			{
-				printf("./shell: Illegal Number: %s\n", argv[1]);
-				return (0);
+				write(STDERR_FILENO, error_msg, _strlen(error_msg));
+				write(STDERR_FILENO, argv[1], _strlen(argv[1]));
+				write(STDERR_FILENO, "\n", 1);
+
+				return (2);
 			}
 		}
 		free_args(argv);
